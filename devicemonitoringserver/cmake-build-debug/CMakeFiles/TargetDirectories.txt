@@ -1,0 +1,7 @@
+C:/cpp/prosoftschool2023/devicemonitoringserver/cmake-build-debug/CMakeFiles/devicemonitoringserver.dir
+C:/cpp/prosoftschool2023/devicemonitoringserver/cmake-build-debug/CMakeFiles/install/local.dir
+C:/cpp/prosoftschool2023/devicemonitoringserver/cmake-build-debug/CMakeFiles/install.dir
+C:/cpp/prosoftschool2023/devicemonitoringserver/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/cpp/prosoftschool2023/devicemonitoringserver/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/cpp/prosoftschool2023/devicemonitoringserver/cmake-build-debug/CMakeFiles/list_install_components.dir
+C:/cpp/prosoftschool2023/devicemonitoringserver/cmake-build-debug/CMakeFiles/install/strip.dir
