@@ -29,9 +29,15 @@ struct ErrorMessage {
 // Структуры сообщений
 class MessageSerializator{
 public:
-    std::string serialize(MessageType type, const void* message);
-    void deserialize(const std::string& data, MessageType& type, void* message);
-private:
+    // Перегрузка для модуля сериализации
+    std::string serialize(const MeterageMessage& message);
+    std::string serialize(const CommandMessage& message);
+    std::string serialize(const ErrorMessage& message);
+
+    // Перегрузка для модуля сериализации
+    void deserialize(const std::string& data, MessageType& type, MeterageMessage& message);
+    void deserialize(const std::string& data, MessageType& type, CommandMessage& message);
+    void deserialize(const std::string& data, MessageType& type, ErrorMessage& message);
 };
 
 #endif //DEVICEMONITORINGSERVER_MESSAGESERIALIZATOR_H

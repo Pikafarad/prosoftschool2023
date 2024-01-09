@@ -5,21 +5,34 @@
 
 
 
-std::string MessageSerializator::serialize(MessageType type, const void *message) {
+
+std::string MessageSerializator::serialize(const MeterageMessage& message) {
     std::ostringstream stream;
-    stream << static_cast<int>(type) << ' ';
-
-    switch (type) {
-        case Meterage:
-            serializeMeterage(stream, *static_cast<const MeterageMessage*>(message));
-            break;
-        case Command:
-            serializeCommand(stream, *static_cast<const CommandMessage*>(message));
-            break;
-        case Error:
-            serializeError(stream, *static_cast<const ErrorMessage*>(message));
-            break;
-    }
-
+    stream << MessageType::Meterage << ' ' << message.value << ' ' << message.timestamp;
     return stream.str();
 }
+
+std::string MessageSerializator::serialize(const CommandMessage& message) {
+    std::ostringstream stream;
+    stream << MessageType::Command << ' ' << message.correction;
+    return stream.str();
+}
+
+std::string MessageSerializator::serialize(const ErrorMessage& message) {
+    std::ostringstream stream;
+    stream << MessageType::Error << ' ' << message.errorType;
+    return stream.str();
+}
+
+void MessageSerializator::deserialize(const std::string& data) {
+    switch (data.) {
+
+}
+    std::istringstream stream(data);
+    stream >> message.value >> message.timestamp;
+}
+
+}
+
+
+
