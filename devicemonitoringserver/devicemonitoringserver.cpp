@@ -48,6 +48,7 @@ void DeviceMonitoringServer::sendMessage(uint64_t deviceId, const std::string& m
 
 void DeviceMonitoringServer::onMessageReceived(uint64_t /*deviceId*/, const std::string& /*message*/)
 {
+
     // TODO
 }
 

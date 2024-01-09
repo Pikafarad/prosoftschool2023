@@ -6,7 +6,7 @@ FILE(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.h ${CMAKE_CURRENT_SOURCE_DIR}/*.
                   ${CMAKE_CURRENT_SOURCE_DIR}/server/*.h ${CMAKE_CURRENT_SOURCE_DIR}/server/*.cpp
 				  ${CMAKE_CURRENT_SOURCE_DIR}/servermock/*.h ${CMAKE_CURRENT_SOURCE_DIR}/servermock/*.cpp)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES} messageserializator.h messageserializator.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${PROJECT_NAME})
