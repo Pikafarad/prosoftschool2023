@@ -5,6 +5,8 @@
 #include <servermock/connectionservermock.h>
 #include "devicemock.h"
 #include "devicemonitoringserver.h"
+#include "messageserializator.h"
+#include <variant>
 #include <chrono>
 
 int main()
@@ -36,10 +38,19 @@ std::cout << conn << std::endl;
 
 
 // Создаем вектор для тестового сообщений
-std::vector<uint8_t> testMeterages = {3};
+std::vector<uint8_t> testMeterages = {3, 5, 6, 7, 9};
 
 // Отправляем тестовый список измерений
 device.setMeterages(testMeterages);
 device.startMeterageSending();
+
+
+
+
+
+
+
+
+
 return 0;
 }

@@ -1,6 +1,6 @@
-#include <iostream>
-#include <sstream>
+
 #include <messageserializator.h>
+
 // Типы сообщений
 
 
@@ -24,13 +24,31 @@ std::string MessageSerializator::serialize(const ErrorMessage& message) {
     return stream.str();
 }
 
-void MessageSerializator::deserialize(const std::string& data) {
-    switch (data.) {
-
-}
+std::variant<struct MeterageMessage, struct CommandMessage,struct ErrorMessage> MessageSerializator::deserialize(const std::string& data) {
     std::istringstream stream(data);
-    stream >> message.value >> message.timestamp;
-}
+    int type = 0;
+    stream >> type;
+    switch (type)
+    {
+    case 0:
+        struct MeterageMessage Meterage;
+        stream  >>  Meterage.value >> Meterage.timestamp;
+        return Meterage;
+        break;
+    case 1:
+        struct CommandMessage Command;
+        stream  >>  Command.correction;
+        return Command;
+        break;
+    case 2:
+        struct ErrorMessage Error;
+        stream  >>  Error.errorType;
+        return Error;
+        break;
+
+
+    }
+
 
 }
 

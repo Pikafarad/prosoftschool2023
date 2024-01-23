@@ -3,6 +3,9 @@
 
 #include "common.h"
 #include <string>
+#include <variant>
+#include <iostream>
+#include <sstream>
 
 enum MessageType {
     Meterage,
@@ -12,7 +15,7 @@ enum MessageType {
 
 // Структура сообщения с измерением
 struct MeterageMessage {
-    uint8_t value;
+    int64_t value;
     uint64_t timestamp;
 };
 
@@ -30,14 +33,13 @@ struct ErrorMessage {
 class MessageSerializator{
 public:
     // Перегрузка для модуля сериализации
-    std::string serialize(const MeterageMessage& message);
-    std::string serialize(const CommandMessage& message);
-    std::string serialize(const ErrorMessage& message);
+    static std::string serialize(const MeterageMessage& message);
+    static std::string serialize(const CommandMessage& message);
+    static std::string serialize(const ErrorMessage& message);
 
-    // Перегрузка для модуля сериализации
-    void deserialize(const std::string& data, MessageType& type, MeterageMessage& message);
-    void deserialize(const std::string& data, MessageType& type, CommandMessage& message);
-    void deserialize(const std::string& data, MessageType& type, ErrorMessage& message);
+    // Перегрузка для модуля десериализации
+    static std::variant<struct MeterageMessage, struct CommandMessage,struct ErrorMessage> deserialize(const std::string& data);
+
 };
 
 #endif //DEVICEMONITORINGSERVER_MESSAGESERIALIZATOR_H

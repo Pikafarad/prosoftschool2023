@@ -46,10 +46,11 @@ void DeviceMonitoringServer::sendMessage(uint64_t deviceId, const std::string& m
         conn->sendMessage(message);
 }
 
-void DeviceMonitoringServer::onMessageReceived(uint64_t /*deviceId*/, const std::string& /*message*/)
+void DeviceMonitoringServer::onMessageReceived(uint64_t deviceId, const std::string& message)
 {
 
-    // TODO
+
+
 }
 
 void DeviceMonitoringServer::onDisconnected(uint64_t /*clientId*/)

@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include "messageserializator.h"
 
 
 class AbstractClientConnection;
@@ -70,6 +71,7 @@ private:
 
 private:
     AbstractClientConnection* m_clientConnection = nullptr;
+    //Временно поставил 64
     std::vector<uint8_t> m_meterages;
     uint64_t m_timeStamp = 0;
 };
