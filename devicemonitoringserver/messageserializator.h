@@ -6,6 +6,7 @@
 #include <variant>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 enum MessageType {
     Meterage,

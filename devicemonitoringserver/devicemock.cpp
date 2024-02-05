@@ -89,6 +89,7 @@ void DeviceMock::onMessageReceived(const std::string& messeg)
             std::cout << "Received ErrorMessage with error type: " << arg.errorType << std::endl;
         }
     }, message);
+    std::cout << messeg << std::endl;
     sendNextMeterage(); // Отправляем следующее измерение
 }
 

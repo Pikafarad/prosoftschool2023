@@ -48,7 +48,22 @@ void DeviceMonitoringServer::sendMessage(uint64_t deviceId, const std::string& m
 
 void DeviceMonitoringServer::onMessageReceived(uint64_t deviceId, const std::string& message)
 {
+    std::variant<MeterageMessage, CommandMessage, ErrorMessage> messages = MessageSerializator::deserialize(message);
 
+    std::visit([](auto&& arg) {
+        using T = std::decay_t<decltype(arg)>;
+        if constexpr (std::is_same_v<T, MeterageMessage>) {
+            std::cout << "Received MeterageMessage with value: " << arg.value << " and timestamp: " << arg.timestamp << std::endl;
+
+
+        } else if constexpr (std::is_same_v<T, CommandMessage>) {
+            std::cout << "Received CommandMessage with correction: " << arg.correction << std::endl;
+        } else if constexpr (std::is_same_v<T, ErrorMessage>) {
+            std::cout << "Received ErrorMessage with error type: " << arg.errorType << std::endl;
+        }
+    }, messages);
+    std::string a = "hui";
+    sendMessage(deviceId, a);
 
 
 }

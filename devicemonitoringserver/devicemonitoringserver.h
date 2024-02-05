@@ -5,6 +5,8 @@
 
 #include <cstdint>
 #include <string>
+#include "messageserializator.h"
+
 
 struct DeviceWorkSchedule;
 class AbstractConnectionServer;
