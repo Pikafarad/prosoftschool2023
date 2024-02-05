@@ -41,10 +41,12 @@ std::cout << conn << std::endl;
 std::vector<uint8_t> testMeterages = {3, 5, 6, 7, 9};
 
 // Отправляем тестовый список измерений
-device.setMeterages(testMeterages);
-device.startMeterageSending();
 
-taskQueue.processTask();
+
+device.setMeterages(testMeterages);
+while (taskQueue.processTask())
+    device.startMeterageSending();
+
 
 
 
