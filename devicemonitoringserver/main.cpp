@@ -5,6 +5,7 @@
 #include <servermock/connectionservermock.h>
 #include "devicemock.h"
 #include "devicemonitoringserver.h"
+#include "deviceworkschedule.h"
 #include "messageserializator.h"
 #include <variant>
 #include <chrono>
@@ -34,15 +35,20 @@ servers.listen(5);
 // Запрашиваем подключение к серверу
 bool conn = 0;
 conn = device.connectToServer(5);
-std::cout << conn << std::endl;
+//std::cout << conn << std::endl;
 
+struct Phase phas{1, 8};
+struct DeviceWorkSchedule sched;
+
+sched.deviceId = 13;
+sched.schedule.push_back(phas);
 
 // Создаем вектор для тестового сообщений
 std::vector<uint8_t> testMeterages = {3, 5, 6, 7, 9};
 
 // Отправляем тестовый список измерений
 
-
+servers.setDeviceWorkSchedule(sched);
 device.setMeterages(testMeterages);
 while (taskQueue.processTask())
     device.startMeterageSending();

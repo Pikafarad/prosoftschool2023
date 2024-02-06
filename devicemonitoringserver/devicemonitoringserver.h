@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <string>
 #include "messageserializator.h"
+#include "commandcenter.h"
 
 
 struct DeviceWorkSchedule;
@@ -29,7 +30,7 @@ public:
     /*!
      * \brief Установить план работы устройств.
      */
-    void setDeviceWorkSchedule(const DeviceWorkSchedule&);
+    void setDeviceWorkSchedule(const DeviceWorkSchedule& schedul);
     /*!
      * \brief Начать прием подключений по идентификатору \a serverId
      */
@@ -65,6 +66,9 @@ private:
 
 private:
     AbstractConnectionServer* m_connectionServer = nullptr;
+
+    CommandCenter* m_center = new CommandCenter;
+
 };
 
 #endif // DEVICEMONITORINGSERVER_H

@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <vector>
 
+
+
 /*!
  * \brief Параметры этапа.
  */

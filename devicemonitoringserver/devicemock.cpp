@@ -77,19 +77,32 @@ void DeviceMock::onMessageReceived(const std::string& messeg)
 {
     // TODO: Разобрать std::string, прочитать команду,
     // записать ее в список полученных комманд
-    std::variant<MeterageMessage, CommandMessage, ErrorMessage> message = MessageSerializator::deserialize(messeg);
-
-    std::visit([](auto&& arg) {
-        using T = std::decay_t<decltype(arg)>;
-        if constexpr (std::is_same_v<T, MeterageMessage>) {
-            std::cout << "Received MeterageMessage with value: " << arg.value << " and timestamp: " << arg.timestamp << std::endl;
-        } else if constexpr (std::is_same_v<T, CommandMessage>) {
-            std::cout << "Received CommandMessage with correction: " << arg.correction << std::endl;
-        } else if constexpr (std::is_same_v<T, ErrorMessage>) {
-            std::cout << "Received ErrorMessage with error type: " << arg.errorType << std::endl;
+    struct MeterageMessage a;
+    struct CommandMessage b;
+    std::istringstream stream(messeg);
+    int type = 0;
+    stream >> type;
+    switch (type) {
+        case 0: {
+                a = MessageSerializator::deserializeMeterage(messeg);
         }
-    }, message);
-    std::cout << messeg << std::endl;
+        case 1: {
+            CommandMessage command;
+            b = MessageSerializator::deserializeCommand(messeg);
+            std::cout << type << " " << b.correction << std::endl;
+
+        }
+        case 2: {
+            ErrorMessage error;
+            stream >> error.errorType;
+
+        }
+        // Вы можете выбрать, какой тип возвращать по умолчанию, в данном случае возвращаю MeterageMessage в std::variant
+        default: {
+            MeterageMessage defaultMeterage;
+
+        }
+    }
     sendNextMeterage(); // Отправляем следующее измерение
 }
 

@@ -22,7 +22,7 @@ struct MeterageMessage {
 
 // Структура сообщения с командой управления
 struct CommandMessage {
-    double correction;
+    uint8_t correction;
 };
 
 // Структура сообщения со статусом ошибки
@@ -39,7 +39,9 @@ public:
     static std::string serialize(const ErrorMessage& message);
 
     // Перегрузка для модуля десериализации
-    static std::variant<struct MeterageMessage, struct CommandMessage,struct ErrorMessage> deserialize(const std::string& data);
+    static struct MeterageMessage deserializeMeterage(const std::string& data);
+    static struct CommandMessage deserializeCommand(const std::string& data);
+    static struct ErrorMessage deserializeError(const std::string& data);
 
 };
 
