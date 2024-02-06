@@ -89,7 +89,8 @@ void DeviceMock::onMessageReceived(const std::string& messeg)
         case 1: {
             CommandMessage command;
             b = MessageSerializator::deserializeCommand(messeg);
-            std::cout << type << " " << b.correction << std::endl;
+
+
 
         }
         case 2: {

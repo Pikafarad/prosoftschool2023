@@ -46,6 +46,8 @@ std::string CommandCenter::processingMeterage(std::string meterage, uint64_t dev
 
     const struct CommandMessage Commande{value};
     std::string get = MessageSerializator::serialize(Commande);
-//    std::cout.write(get.c_str(), get.size());
+    for (char c : get) {
+        std::cout << static_cast<int>(c) << " ";
+}
     return get;
 }
