@@ -28,7 +28,8 @@ std::string MessageSerializator::serialize(const ErrorMessage& message) {
 struct MeterageMessage MessageSerializator::deserializeMeterage(const std::string& data){
     std::istringstream stream(data);
     MeterageMessage meterage;
-    stream >> meterage.value >> meterage.timestamp;
+    int type = 0;
+    stream >> type >> meterage.value >> meterage.timestamp;
     return meterage;
 
 }
@@ -36,7 +37,8 @@ struct MeterageMessage MessageSerializator::deserializeMeterage(const std::strin
 struct CommandMessage MessageSerializator::deserializeCommand(const std::string& data){
     std::istringstream stream(data);
     CommandMessage command;
-    stream >> command.correction;
+    int type = 0;
+    stream >> type >> command.correction;
     return command;
 
 }

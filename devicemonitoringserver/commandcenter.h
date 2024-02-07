@@ -13,8 +13,10 @@ public:
     // Сравнение измерений
     std::string processingMeterage(std::string meterage, uint64_t deviceID);
 
+
 private:
     std::map<uint64_t, std::vector<Phase>> planes;
+    std::map<uint64_t, uint8_t> plansValue;
 };
 
 #endif // COMMANDCENTER_H

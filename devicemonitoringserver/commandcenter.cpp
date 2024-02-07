@@ -1,36 +1,34 @@
 #include "commandcenter.h"
 
+
+
 void CommandCenter::setWorkSchedule(const DeviceWorkSchedule* schedul){
     planes[schedul->deviceId] = schedul->schedule;
 }
 
-std::string CommandCenter::processingMeterage(std::string meterage, uint64_t deviceID){
+std::string CommandCenter::processingMeterage(const std::string meterage, uint64_t deviceID){
 
     uint8_t plans = 0;
-    uint8_t value = 0;
+    int64_t value = 0;
 
-    struct MeterageMessage a;
     std::istringstream stream(meterage);
     int type = 0;
     stream >> type;
     switch (type) {
-        case 0: {
-            MeterageMessage meterage;
-            stream >> meterage.value >> meterage.timestamp;
-            for(size_t i = 0; i < planes[deviceID].size(); i++ )
-            {
-                if(meterage.timestamp >= planes[deviceID][i].timeStamp)
-                {
-                    plans = planes[deviceID][i].value;
-                    value = plans - meterage.value;
-                }
+        case 0:
+        {
 
+            MeterageMessage meterageStruct = MessageSerializator::deserializeMeterage(meterage);
+            if(meterageStruct.timestamp == planes[deviceID][0].timeStamp)
+            {
+                plansValue[deviceID] = planes[deviceID][0].value;
+                planes[deviceID].erase( planes[deviceID].begin());
             }
+            value = static_cast<int64_t>(plansValue[deviceID]) - static_cast<int64_t>(meterageStruct.value);
         }
         case 1: {
             CommandMessage command;
             stream >> command.correction;
-
         }
         case 2: {
             ErrorMessage error;
@@ -46,8 +44,10 @@ std::string CommandCenter::processingMeterage(std::string meterage, uint64_t dev
 
     const struct CommandMessage Commande{value};
     std::string get = MessageSerializator::serialize(Commande);
-    for (char c : get) {
-        std::cout << static_cast<int>(c) << " ";
-}
+
+    //debug
+    struct CommandMessage h = MessageSerializator::deserializeCommand(get);
+    std::cout << static_cast<int>(h.correction) << std::endl;
+
     return get;
 }

@@ -22,7 +22,7 @@ struct MeterageMessage {
 
 // Структура сообщения с командой управления
 struct CommandMessage {
-    uint8_t correction;
+    int64_t correction;
 };
 
 // Структура сообщения со статусом ошибки
