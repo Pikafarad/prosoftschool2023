@@ -95,7 +95,7 @@ void DeviceMock::onMessageReceived(const std::string& messeg)
         }
         case 2: {
             ErrorMessage error;
-            stream >> error.errorType;
+//            stream >> error.errorType;
 
         }
         // Вы можете выбрать, какой тип возвращать по умолчанию, в данном случае возвращаю MeterageMessage в std::variant

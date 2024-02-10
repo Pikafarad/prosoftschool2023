@@ -20,7 +20,23 @@ std::string MessageSerializator::serialize(const CommandMessage& message) {
 
 std::string MessageSerializator::serialize(const ErrorMessage& message) {
     std::ostringstream stream;
-    stream << MessageType::Error << ' ' << message.errorType;
+    stream << MessageType::Error << ' ';
+
+    switch (message.type) {
+        case ErrorMessage::NoSchedule:
+            stream << 0;
+            break;
+        case ErrorMessage::NoTimestamp:
+            stream << 1;
+            break;
+        case ErrorMessage::Obsolete:
+            stream << 2;
+            break;
+        default:
+            // Обработка неизвестного типа ошибки
+            break;
+    }
+
     return stream.str();
 }
 
@@ -40,6 +56,17 @@ struct CommandMessage MessageSerializator::deserializeCommand(const std::string&
     int type = 0;
     stream >> type >> command.correction;
     return command;
+
+}
+
+struct ErrorMessage MessageSerializator::deserializeError(const std::string &data){
+    std::istringstream stream(data);
+    ErrorMessage err;
+    int type = 0;
+    int typeError = 0;
+    stream >> type >> typeError;
+    err.type = static_cast<ErrorMessage::errorType>(typeError);
+    return err;
 
 }
 

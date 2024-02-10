@@ -14,6 +14,12 @@ enum MessageType {
     Error
 };
 
+enum errorType {
+    NoSchedule,
+    NoTimestamp,
+    Obsolete
+};
+
 // Структура сообщения с измерением
 struct MeterageMessage {
     int64_t value;
@@ -27,7 +33,13 @@ struct CommandMessage {
 
 // Структура сообщения со статусом ошибки
 struct ErrorMessage {
-    std::string errorType;
+    enum errorType {
+        NoSchedule,
+        NoTimestamp,
+        Obsolete
+    };
+
+    errorType type; // Поле для хранения значения перечисления
 };
 
 // Структуры сообщений

@@ -17,6 +17,8 @@ public:
 private:
     std::map<uint64_t, std::vector<Phase>> planes;
     std::map<uint64_t, uint8_t> plansValue;
+    std::map<uint64_t, uint64_t> pastTime;
+    bool bitError = false;
 };
 
 #endif // COMMANDCENTER_H

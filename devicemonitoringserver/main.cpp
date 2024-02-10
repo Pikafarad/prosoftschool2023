@@ -37,14 +37,14 @@ bool conn = 0;
 conn = device.connectToServer(5);
 //std::cout << conn << std::endl;
 
-struct Phase phas{1, 8};
+//struct Phase phas;
 
-struct Phase phas1{3, 50};
+
 struct DeviceWorkSchedule sched;
 
 sched.deviceId = 13;
-sched.schedule.push_back(phas);
-sched.schedule.push_back(phas1);
+//sched.schedule.push_back(phas);
+//sched.schedule.push_back(phas1);
 
 // Создаем вектор для тестового сообщений
 std::vector<uint8_t> testMeterages = {3, 5, 6, 7, 9};
@@ -55,7 +55,6 @@ servers.setDeviceWorkSchedule(sched);
 device.setMeterages(testMeterages);
 while (taskQueue.processTask())
     device.startMeterageSending();
-
 
 
 
