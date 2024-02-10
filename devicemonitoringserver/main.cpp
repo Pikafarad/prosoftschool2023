@@ -37,17 +37,18 @@ bool conn = 0;
 conn = device.connectToServer(5);
 //std::cout << conn << std::endl;
 
-//struct Phase phas;
+struct Phase phas{3, 50};
 
+struct Phase phas1 {5, 60};
 
 struct DeviceWorkSchedule sched;
 
 sched.deviceId = 13;
-//sched.schedule.push_back(phas);
-//sched.schedule.push_back(phas1);
+sched.schedule.push_back(phas);
+sched.schedule.push_back(phas1);
 
 // Создаем вектор для тестового сообщений
-std::vector<uint8_t> testMeterages = {3, 5, 6, 7, 9};
+std::vector<uint8_t> testMeterages = {3, 5, 6, 7, 9, 14, 15, 16};
 
 // Отправляем тестовый список измерений
 
